@@ -20,20 +20,49 @@
 # 4. If not a zero, just increase index
 
 
+# Solution 3:
+# Without needing any additional space, can:
+# 1. Iterate through array with two pointers
+# 2. Increment slow when encountering a non-zero
+# 3. Increment fast everytime
+
+
 from typing import List
 
 class Solution():
   def moveZeroes(self, nums: List[int]) -> None:
     # Solution 2:
-    i = 0
+    # i = 0
+    # length = len(nums)
+    # while(i < length):
+    #   if nums[i] == 0:
+    #     nums.pop(i)
+    #     nums.append(0)
+    #     length -= 1
+    #   else:
+    #     i += 1
+
+    # Solution 3:
+    # slow, fast = 0, 0
+    # while fast < len(nums):
+    #   if nums[slow] == 0 and nums[fast] != 0:
+    #     nums[slow], nums[fast] = nums[fast], nums[slow]
+
+    #   if nums[slow] != 0:
+    #     slow += 1
+    #   fast += 1
+
+    # Solution 4:
     length = len(nums)
-    while(i < length):
-      if nums[i] == 0:
-        nums.pop(i)
-        nums.append(0)
-        length -= 1
-      else:
-        i += 1
+    nums[:] = [num for num in nums if num != 0] 
+    # https://treyhunner.com/2015/12/python-list-comprehensions-now-in-color/
+    # https://docs.python.org/3/tutorial/datastructures.html#tut-listcomps
+
+    # Reference on list[:] or string[:]
+    # https://realpython.com/python-lists-tuples/
+
+    nums += [0]*(length-len(nums))
+
 
 def main():
   s = Solution()
