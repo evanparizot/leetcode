@@ -1,3 +1,5 @@
+# Given an integer arr, count element x such that x+1 is also in arr
+# If there are duplicates in arr, count them seperately
 
 from typing import List
 def countElements(arr: List[int]) -> int:
