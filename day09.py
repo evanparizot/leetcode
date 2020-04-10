@@ -24,7 +24,6 @@ def backspaceCompare(S: str, T: str) -> bool:
           i -= 1
         else:
           del chars[i]
-        
       else:
         i += 1
     return chars
