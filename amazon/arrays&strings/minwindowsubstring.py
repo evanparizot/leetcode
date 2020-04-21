@@ -4,6 +4,8 @@ class Solution:
         left = 0
         right = 0
         letters = list(t)
+
+        
         while left <= len(s) - len(t) and right <= len(s): # If we have less letters left in string than target, no way can do this
             if all(c in s[left:right] for c in letters):
                 # Current substring has all letters
