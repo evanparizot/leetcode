@@ -66,7 +66,7 @@ class LRUCache():
         return res
 
 class Node():
-    def __init__(self)
+    def __init__(self):
         self.key = 0
         self.val = 0
         self.prev = None
