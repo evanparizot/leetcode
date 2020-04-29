@@ -1,30 +1,47 @@
 class Solution():
-  def threeSum(self, nums):
-    nums = sorted(nums)
-    output = []
-    for i in range(0, len(nums)  - 2):
-      if i == 0 or (i > 0 and nums[i] != nums[i-1]):
-        low = i + 1
-        high = len(nums) - 1
-        s = 0 - nums[i]
+    def threeSum(self, nums):
+        # Two Pointer approach
+        # ---------------------------------------------------
+        def twoSumII(self, nums: List[int], i: int, res: List[List[int]]):
+            lo, hi = i + 1, len(nums) -1
+            while lo < hi:
+                sum = nums[i] + nums[lo] + nums[hi]
+                if sum < 0 or (lo > i+1 and nums[lo] == nums[lo-1]):
+                    lo += 1
+                elif sum > 0 or (hi < len(nums) -1 and nums[hi]==nums[hi+1]):
+                    hi -= 1
+                else:
+                    res.append([nums[i], nums[lo], nums[hi]])
+                    lo += 1
+                    hi -= 1
+        
+        res = []
+        nums.sort()
+        for i in range(len(nums)):
+            if nums[i] > 0:
+                break
+            if i == 0 or nums[i -1] != nums[i]:
+                self.twoSumII(nums, i , res)
+        return res
 
-        while low < high:
-          if nums[low] + nums[high] == s:
-            output.append([nums[i], nums[low], nums[high]])
-            while low < high and nums[low] == nums[low+1]: low += 1
-            while low < high and nums[high] == nums[high-1]: high +=1
-            low += 1
-            high += 1
-          elif nums[low] + nums[high] > s:
-            high -= 1
-          else:
-            low += 1
-    return output
 
-  def altThreeSum(self, nums):
-    nums = sorted(nums)
-    output = []
-    seen = set()
-    for i in range(0, len(nums)-2):
-      if i == 0 or (i > 0 and nums[i] != nums[i-1]):
-        nxt = i+1
+
+
+        # Hash set approach
+        # ---------------------------------------------------
+        res = []
+        found, dups = set(), set()
+        seen = {}
+        for i, val1 in enumerate(nums):
+            if val1 not in dups:
+                dups.add(val1)
+                for j, val2 in enumerate(nums[i+1:]):
+                    complement = -val1 - val2
+                    if complement in seen and seen[complement] == i:
+                        min_val = min((val1, val2, complement))
+                        max_val = max((val1, val2, complement))
+                        if (min_val, max_val) not in found:
+                            found.add((min_val, max_val))
+                            res.append([val1, val2, complement])
+                    seen[val2] = i
+        return res
