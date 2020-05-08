@@ -14,50 +14,42 @@ class Solution:
         # Need to do BFS search with a queue
         # Every time we empty the queue is a time period
 
-
-        infect = deque()
+        infected = deque()
         fresh = 0
-
-        row_m = len(grid)
-        col_m = len(grid[0])
-
-        # Get all infected
-        for row in range(row_m):
-            for col in range(col_m):
+        
+        rows = len(grid)
+        cols = len(grid[0])
+        
+        for row in range(rows):
+            for col in range(cols):
                 if grid[row][col] == 2:
-                    infect.append((row, col))
+                    infected.append((row, col))
                 elif grid[row][col] == 1:
                     fresh += 1
-
-        # Maybe unecessary
-        if len(infect) == 0:
-            return -1
-
-        infect.append((-1,-1))
-
-        time = 0
-        # need to start doing this directions list for iteration
-        directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-        while infect:
-            row, col = infect.popleft()
-            # Need to add neighbors
-            if row == -1:
-                time += 1
-                if infect:
-                    infect.append((-1,-1))
+                    
+        if not infected:
+            if not fresh:
+                return 0
             else:
+                return -1
+        
+        time = -1 
+        directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+        
+        while infected:
+            for _ in range(len(infected)):
+                row, col = infected.popleft()
                 for d in directions:
-                    n_row, n_col = row + d[0], col + d[1]
-
-
-                    if row_m > n_row >=0 and col_m > n_col >= 0:
-                        if grid[n_row][n_col] == 1:
-                            # need to infect
-                            grid[n_row][n_col] = 2
+                    nrow, ncol = row + d[0], col + d[1]
+                    
+                    if 0 <= nrow < rows and 0 <= ncol < cols:
+                        if grid[nrow][ncol] == 1:
+                            grid[nrow][ncol] = 2
                             fresh -= 1
-                            # need to add for next tainting
-                            infect.append((n_row, n_col))
-        return time - 1 if not fresh else -1
+                            infected.append((nrow, ncol))
+            time += 1
+        
+        return time if not fresh else -1
 
 s = Solution()
 s.orangesRotting([[2,1,1],[1,1,0],[0,1,1]])

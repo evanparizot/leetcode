@@ -20,6 +20,7 @@ class Solution:
         while current:
             mappings[current] = Node(current.val)
             current = current.next
+
         # Iterate back through original, doing mappings for the lookup clone
         current = head
         while current:
