@@ -81,7 +81,7 @@ class Graph:
   
         # Create a vector to store result (A topological 
         # ordering of the vertices) 
-        top_order = [] 
+        top_order = []
   
         # One by one dequeue vertices from queue and enqueue 
         # adjacents if indegree of adjacent becomes 0 

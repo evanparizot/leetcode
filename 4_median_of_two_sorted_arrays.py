@@ -36,5 +36,9 @@ class Solution:
             ans = (out[mid] + out[mid-1])/2
             return ans
 
+    def findMedianSortedArrays2(self, n1, n2):
+        
+
+
 s = Solution()
 s.findMedianSortedArrays([1,2],[3,4])
