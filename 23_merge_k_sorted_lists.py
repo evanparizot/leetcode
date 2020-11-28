@@ -6,27 +6,50 @@ class ListNode:
 
 from typing import List
 from queue import PriorityQueue
+import heapq
 class Solution:
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
-        q = PriorityQueue()
-        ans = ListNode()
-        head = ans
+        # q = PriorityQueue()
+        # ans = ListNode()
+        # head = ans
         
-        for l in lists:
-            if l:
-                q.put((l.val, l))
+        # for l in lists:
+        #     if l:
+        #         q.put((l.val, l))
 
 
-        while q.not_empty():
-            val, node = q.get()
+        # while q.not_empty():
+        #     val, node = q.get()
+        #     ans.next = ListNode(val)
+        #     ans = ans.next
+        #     node = node.next
+
+        #     if node:
+        #         q.put((node.val, node))
+
+        # return head.next
+        ans = ListNode(None)
+        head = ans
+        heap = []
+        
+        for i, l in enumerate(lists):
+            heapq.heappush(heap, (l.val, i))
+            
+        while heap:
+            # Pop off top of heap
+            val, index = heapq.heappop(heap)
+            
+            # Append to head
             ans.next = ListNode(val)
             ans = ans.next
-            node = node.next
-
-            if node:
-                q.put((node.val, node))
-
+            
+            # Advance pulled node to next (if valid)
+            lists[index] = lists[index].next
+            if lists[index]:
+                heapq.heappush(heap, (lists[index].val, index))
+            
         return head.next
+        
 
 a = ListNode(1)
 a.next = ListNode(4)

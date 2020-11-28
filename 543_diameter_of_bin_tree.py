@@ -5,6 +5,8 @@ class TreeNode:
         self.left = left
         self.right = right
 class Solution:
+    # T = O(n) visited every node once
+    # S = O(n) Implicit call stack during DFS
     def diameterOfBinaryTree(self, root: TreeNode) -> int:
         longest = 0
         self.postDFS(root, longest)

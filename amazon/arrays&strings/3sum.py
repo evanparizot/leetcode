@@ -2,6 +2,10 @@ class Solution():
     def threeSum(self, nums):
         # Two Pointer approach
         # ---------------------------------------------------
+        # T = O(n^2)
+        #  Two sum is O(n) but we call it n times
+        # S = O(log(n)) or O(n)
+        #  Depends on implementation of the sorting algorithm
         def twoSumII(self, nums: List[int], i: int, res: List[List[int]]):
             lo, hi = i + 1, len(nums) -1
             while lo < hi:

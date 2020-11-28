@@ -1,6 +1,8 @@
 from typing import List
 from collections import defaultdict
 class Solution:
+    # T = O(mn) where m is the length of words and n is the total number of words
+    # S = O(mn) storing m transformations for each of the n words
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         """
         :type beginWord: str
@@ -47,3 +49,7 @@ class Solution:
                         queue.append((word, level + 1))
                 all_combo_dict[intermediate_word] = []
         return 0
+
+# class Solution2:
+#     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        
